@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Germaniya Live — Real Hayot & Gapirish</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Top Header -->
+    <header class="topbar">
+      <div class="brand">
+        <div class="flag-badge">🇩🇪</div>
+        <div>
+          <h1>Germaniya <span class="accent">Live</span></h1>
+          <p id="userGreeting">Real ko'cha va do'kon muloqoti</p>
+        </div>
+      </div>
+      <div class="stats-pill">
+        <span>⚡ <strong id="xpCount">0</strong> XP</span>
+      </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="nav-tabs">
+      <button class="tab-btn active" data-tab="street">🎬 Ko'cha & Do'kon</button>
+      <button class="tab-btn" data-tab="news">📰 Yangiliklar</button>
+      <button class="tab-btn" data-tab="phrases">💬 Kundalik So'zlar</button>
+      <button class="tab-btn" data-tab="ai">🎙️ AI Suhbat</button>
+    </nav>
+
+    <!-- Main Content Views -->
+    <main class="content-area">
+      <!-- TAB 1: Ko'cha Intervyulari & Do'kon Dialoglari -->
+      <section id="tab-street" class="tab-panel active">
+        <div class="filter-bar">
+          <button class="chip active" data-filter="all">Barchasi</button>
+          <button class="chip" data-filter="interview">🎤 Ko'cha Intervyu</button>
+          <button class="chip" data-filter="shop">🛒 Do'kon & Kassa</button>
+          <button class="chip" data-filter="cafe">🥙 Kafe & Döner</button>
+          <button class="chip" data-filter="street">🚇 Yo'l So'rash</button>
+        </div>
+
+        <div id="scenesContainer" class="cards-list"></div>
+      </section>
+
+      <!-- TAB 2: Germaniya Yangiliklari & Ovoz -->
+      <section id="tab-news" class="tab-panel">
+        <div class="speed-control card">
+          <span>🔊 O'qish tezligi:</span>
+          <div class="speed-btns">
+            <button class="speed-btn" data-rate="0.75">0.75x Sekin</button>
+            <button class="speed-btn active" data-rate="1.0">1.0x Tabiiy</button>
+            <button class="speed-btn" data-rate="1.2">1.2x Tez</button>
+          </div>
+        </div>
+        <div id="newsContainer" class="cards-list"></div>
+      </section>
+
+      <!-- TAB 3: Kundalik So'zlar & Slang -->
+      <section id="tab-phrases" class="tab-panel">
+        <div id="phrasesContainer" class="cards-list"></div>
+      </section>
+
+      <!-- TAB 4: AI Suhbatdosh (Real Xotira bilan) -->
+      <section id="tab-ai" class="tab-panel">
+        <div class="chat-header-bar card">
+          <div>
+            <strong>Lukas aus Berlin 🇩🇪</strong>
+            <small>Xotira saqlanadi • Mikrofon yoki yozuv orqali gaplashing</small>
+          </div>
+          <button id="clearChatBtn" class="btn-ghost" title="Tarixni tozalash">🗑️</button>
+        </div>
+
+        <div class="scenario-select">
+          <label>Muhit:</label>
+          <select id="chatScenario">
+            <option value="street">🎤 Ko'chada tasodifiy intervyu</option>
+            <option value="shop">🛒 REWE do'konida kassada</option>
+            <option value="cafe">🥙 Dönerxona yoki kafeda</option>
+          </select>
+        </div>
+
+        <div id="chatMessages" class="chat-box"></div>
+
+        <div class="chat-input-bar">
+          <button id="micChatBtn" class="btn-mic" title="Ovoz bilan gapirish">🎙️</button>
+          <input type="text" id="chatInput" placeholder="Nemischa yozing yoki mikrofonni bosing..." />
+          <button id="sendChatBtn" class="btn-primary">➤</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Roleplay Modal ("Endi Siz Gapiring!") -->
+  <div id="roleplayModal" class="modal hidden">
+    <div class="modal-card">
+      <div class="modal-top">
+        <span class="badge-live">🎙️ ENDI SIZ GAPIRING!</span>
+        <button id="closeModalBtn" class="btn-close">✕</button>
+      </div>
+      <h3 id="modalPromptDe"></h3>
+      <p id="modalPromptUz" class="muted"></p>
+
+      <div class="sample-box">
+        <small>💡 Namuna javob (eshitish uchun bosing):</small>
+        <p id="modalSampleDe" class="de-text"></p>
+        <p id="modalSampleUz" class="uz-text"></p>
+        <button id="listenSampleBtn" class="btn-secondary">🔊 Namunani eshitish</button>
+      </div>
+
+      <div class="record-zone">
+        <button id="recordRoleplayBtn" class="btn-record">🎙️ Mikrofonni bosib javob bering</button>
+        <p id="speechResultText" class="speech-feedback">Gapirganingiz bu yerda ko'rinadi...</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
